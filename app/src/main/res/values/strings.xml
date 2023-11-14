@@ -19,4 +19,8 @@
     <string name="quotient">/</string>
     <string name="module">%</string>
     <string name="equal">=</string>
+    <string name="pow">^</string>
+    <string name="sqrt">sqrt</string>
+    <string name="sin">sin</string>
+    <string name="cosin">cos</string>
 </resources>
