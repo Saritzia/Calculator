@@ -11,6 +11,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/resultTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,7 +32,7 @@
             android:padding="5dp"
             android:text="0"
             android:textAlignment="textEnd"
-            android:textSize="25sp" />
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +50,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/AC"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"
                     />
@@ -50,7 +62,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/sign"
-                    android:textSize="20sp"
+                    android:textSize="10sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
                 <Button
@@ -61,7 +73,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/module"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
                 <Button
@@ -72,7 +84,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/quotient"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
                 <Button
@@ -83,7 +95,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/sin"
-                    android:textSize="20sp"
+                    android:textSize="10sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
             </LinearLayout>
@@ -104,7 +116,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/seven"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -115,7 +127,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/eight"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -126,7 +138,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/nine"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -137,7 +149,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/plus"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/green"/>
                 <Button
@@ -148,7 +160,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/cosin"
-                    android:textSize="20sp"
+                    android:textSize="10sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
             </LinearLayout>
@@ -170,7 +182,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/four"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -181,7 +193,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/five"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -192,7 +204,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/six"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -203,7 +215,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/minus"
-                    android:textSize="30sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/green"/>
                 <Button
@@ -214,7 +226,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/pow"
-                    android:textSize="30sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
             </LinearLayout>
@@ -235,7 +247,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/one"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -246,7 +258,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/two"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -257,7 +269,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/three"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -268,7 +280,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/multiply"
-                    android:textSize="20sp"
+                    android:textSize="10sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/green"/>
                 <Button
@@ -279,7 +291,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/sqrt"
-                    android:textSize="20sp"
+                    android:textSize="10sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/gray"/>
             </LinearLayout>
@@ -302,7 +314,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/zero"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -313,7 +325,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/point"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/brown"/>
                 <Button
@@ -324,7 +336,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:text="@string/equal"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/green"/>
             </LinearLayout>

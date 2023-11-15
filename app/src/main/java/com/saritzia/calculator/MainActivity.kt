@@ -1,15 +1,16 @@
 package com.saritzia.calculator
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.saritzia.calculator.databinding.ActivityMainBinding
-import java.lang.Math.*
 import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var result = 0.0
-    private var valuesToCalculate = "0"
+    private var result= "0"
+    private var number = "0"
+    private var operationSymbol : String? = null
     private enum class Operation {
         NUMBERSIGN,
         SIN,
@@ -20,171 +21,180 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.resultTextView.text = "$result"
+
+        result = savedInstanceState?.getString("result") ?: "0"
+        number = savedInstanceState?.getString("number") ?: "0"
+        operationSymbol = savedInstanceState?.getString("operation") ?: null
+
+        binding.resultTextView.text = number
+        binding.totalTextView.text = result
         checkButtonTapped()
     }
 
-    private fun updateResultText() {
-        binding.resultTextView.text = "$result"
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("result",result)
+        outState.putString("number",number)
+        outState.putString("operation",operationSymbol)
     }
-
     private fun calculateInstantResult(operation: Operation) {
         result = when(operation){
-            Operation.NUMBERSIGN -> changeNumberSign()
-            Operation.SIN -> kotlin.math.sin(valuesToCalculate.toDouble())
-            Operation.COSIN -> kotlin.math.cos(valuesToCalculate.toDouble())
-            Operation.SQRT -> kotlin.math.sqrt(valuesToCalculate.toDouble())
+            Operation.NUMBERSIGN -> changeNumberSign().toString()
+            Operation.SIN -> kotlin.math.sin(result.toDouble()).toString()
+            Operation.COSIN -> kotlin.math.cos(result.toDouble()).toString()
+            Operation.SQRT -> kotlin.math.sqrt(result.toDouble()).toString()
         }
+        number = "0"
+    }
+
+    private fun updateResultText() {
+        binding.resultTextView.text = number
+        binding.totalTextView.text = result
     }
 
     private fun calculateComplexResult() {
-        val fragments = valuesToCalculate.split(" ")
-        result = fragments[0].toDouble()
-        var contador = 0
-        while(contador<fragments.size){
+        if(operationSymbol!=null) {
             when {
-                fragments[contador].equals("+") -> {
-                    contador++
-                    result += fragments[contador].toDouble()
+                operationSymbol.equals("+") -> {
+                    result = (result.toInt() + number.toInt()).toString()
                 }
-                fragments[contador].equals("-") -> {
-                    contador++
-                    result -= fragments[contador].toDouble()
-                }
-                fragments[contador].equals("*") -> {
-                    contador++
-                    result *= fragments[contador].toDouble()
-                }
-                fragments[contador].equals("/") -> {
-                    contador++
-                    result /= fragments[contador].toDouble()
-                }
-                fragments[contador].equals("%") -> {
-                    contador++
-                    result %= fragments[contador].toDouble()
-                }
-                fragments[contador].equals("^") -> {
-                    contador++
-                    result = result.pow(fragments[contador].toDouble())
-                }
-             }
-            contador++
-        }
-        valuesToCalculate = result.toString()
-        updateResultText()
-    }
 
-    private fun changeNumberSign():Double {
-        if (valuesToCalculate>"0") {
-            return (-kotlin.math.abs(valuesToCalculate.toDouble()))
-        } else {
-           return kotlin.math.abs(valuesToCalculate.toDouble())
-        }
-    }
+                operationSymbol.equals("-") -> {
+                    result = (result.toInt() - number.toInt()).toString()
+                }
 
-    private fun addSymbol(symbol: String) {
-        valuesToCalculate = "{$valuesToCalculate} {$symbol} "
-        updateResultText()
-    }
+                operationSymbol.equals("*") -> {
+                    result = (result.toInt() * number.toInt()).toString()
+                }
 
-    private fun createLongNumber(number: Int){
-        if(!valuesToCalculate.equals("0")){
-            valuesToCalculate = "${this.valuesToCalculate}$number"
+                operationSymbol.equals("/") -> {
+                    result = (result.toInt() / number.toInt()).toString()
+                }
+
+                operationSymbol.equals("%") -> {
+                    result = (result.toInt() % number.toInt()).toString()
+                }
+
+                operationSymbol.equals("^") -> {
+                    result = ((result.toDouble()).pow((number.toInt()))).toString()
+                }
+                operationSymbol.equals("=") -> number = "0"
+            }
         }else {
-            valuesToCalculate="$number"
+            result = number
         }
         updateResultText()
     }
 
+    private fun changeNumberSign() {
+        if (operationSymbol == null){
+            result = number
+        }
+        result = if (result.toInt()>0) {
+            ("-$result")
+        } else {
+            result.substring(1)
+        }
+        operationSymbol = "="
+        binding.resultTextView.text = result
+    }
+    private fun createLongNumber(buttonNumber: String){
+        number = if(number != "0") {
+            "$number$buttonNumber"
+        }else {
+            buttonNumber
+        }
+        updateResultText()
+    }
     private fun checkButtonTapped() {
         binding.oneButton.setOnClickListener {
-            createLongNumber(1)
+            createLongNumber("1")
         }
         binding.twoButton.setOnClickListener {
-            createLongNumber(2)
+            createLongNumber("2")
         }
         binding.threeButton.setOnClickListener {
-            createLongNumber(3)
+            createLongNumber("3")
         }
         binding.fourButton.setOnClickListener {
-            createLongNumber(4)
+            createLongNumber("4")
         }
         binding.fiveButton.setOnClickListener {
-            createLongNumber(5)
+            createLongNumber("5")
         }
         binding.sixButton.setOnClickListener {
-            createLongNumber(6)
+            createLongNumber("6")
         }
         binding.sevenButton.setOnClickListener {
-            createLongNumber(7)
+            createLongNumber("7")
         }
         binding.eightButton.setOnClickListener {
-            createLongNumber(8)
+            createLongNumber("8")
         }
         binding.nineButton.setOnClickListener {
-            createLongNumber(9)
+            createLongNumber("9")
         }
         binding.zeroButton.setOnClickListener {
-            createLongNumber(0)
+            createLongNumber("0")
         }
         binding.acButton.setOnClickListener {
-            valuesToCalculate = "0"
-            result = 0.0
+            number = "0"
+            result = "0"
+            operationSymbol = null
             updateResultText()
         }
         binding.cosinButton?.setOnClickListener {
             calculateInstantResult(Operation.COSIN)
-            valuesToCalculate = result.toString()
             updateResultText()
         }
         binding.sinButton?.setOnClickListener {
             calculateInstantResult(Operation.COSIN)
-            valuesToCalculate = result.toString()
             updateResultText()
         }
         binding.sqrtButton?.setOnClickListener {
             calculateInstantResult(Operation.SQRT)
-            valuesToCalculate = result.toString()
             updateResultText()
         }
         binding.dotButton.setOnClickListener {
-            addSymbol(".")
-            valuesToCalculate = result.toString()
             updateResultText()
         }
         binding.plusButton.setOnClickListener {
-            addSymbol("+")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "+"
         }
         binding.minusButton.setOnClickListener {
-            addSymbol("-")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "-"
         }
         binding.multiplyButton.setOnClickListener {
-            addSymbol("*")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "*"
         }
         binding.quotientButton.setOnClickListener {
-            addSymbol("/")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "/"
         }
         binding.moduleButton.setOnClickListener {
-            addSymbol("%")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "%"
         }
         binding.powButton?.setOnClickListener {
-            addSymbol("^")
-            valuesToCalculate = result.toString()
-            updateResultText()
+            calculateComplexResult()
+            number = "0"
+            operationSymbol = "^"
         }
         binding.equalButton.setOnClickListener {
             calculateComplexResult()
-            updateResultText()
+            operationSymbol = "="
+            binding.resultTextView.text = result
+        }
+        binding.possitiveOrNegativeButton.setOnClickListener {
+            changeNumberSign()
         }
     }
 }
