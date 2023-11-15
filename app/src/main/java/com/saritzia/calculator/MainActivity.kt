@@ -38,13 +38,23 @@ class MainActivity : AppCompatActivity() {
         outState.putString("operation",operationSymbol)
     }
     private fun calculateInstantResult(operation: Operation) {
-        result = when(operation){
-            Operation.NUMBERSIGN -> changeNumberSign().toString()
-            Operation.SIN -> kotlin.math.sin(result.toDouble()).toString()
-            Operation.COSIN -> kotlin.math.cos(result.toDouble()).toString()
-            Operation.SQRT -> kotlin.math.sqrt(result.toDouble()).toString()
+        if(operationSymbol==null) {
+            result = when (operation) {
+                Operation.NUMBERSIGN -> changeNumberSign().toString()
+                Operation.SIN -> kotlin.math.sin(number.toFloat()).toString()
+                Operation.COSIN -> kotlin.math.cos(number.toFloat()).toString()
+                Operation.SQRT -> kotlin.math.sqrt(number.toFloat()).toString()
+            }
+        }else {
+            result = when (operation) {
+                Operation.NUMBERSIGN -> changeNumberSign().toString()
+                Operation.SIN -> kotlin.math.sin(result.toFloat()).toString()
+                Operation.COSIN -> kotlin.math.cos(result.toFloat()).toString()
+                Operation.SQRT -> kotlin.math.sqrt(result.toFloat()).toString()
+            }
         }
         number = "0"
+        operationSymbol = "="
     }
 
     private fun updateResultText() {
@@ -56,27 +66,27 @@ class MainActivity : AppCompatActivity() {
         if(operationSymbol!=null) {
             when {
                 operationSymbol.equals("+") -> {
-                    result = (result.toInt() + number.toInt()).toString()
+                    result = (result.toFloat() + number.toFloat()).toString()
                 }
 
                 operationSymbol.equals("-") -> {
-                    result = (result.toInt() - number.toInt()).toString()
+                    result = (result.toFloat() - number.toFloat()).toString()
                 }
 
                 operationSymbol.equals("*") -> {
-                    result = (result.toInt() * number.toInt()).toString()
+                    result = (result.toFloat() * number.toFloat()).toString()
                 }
 
                 operationSymbol.equals("/") -> {
-                    result = (result.toInt() / number.toInt()).toString()
+                    result = (result.toFloat() / number.toFloat()).toString()
                 }
 
                 operationSymbol.equals("%") -> {
-                    result = (result.toInt() % number.toInt()).toString()
+                    result = (result.toFloat() % number.toFloat()).toString()
                 }
 
                 operationSymbol.equals("^") -> {
-                    result = ((result.toDouble()).pow((number.toInt()))).toString()
+                    result = ((result.toFloat()).pow((number.toFloat()))).toString()
                 }
                 operationSymbol.equals("=") -> number = "0"
             }
@@ -90,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         if (operationSymbol == null){
             result = number
         }
-        result = if (result.toInt()>0) {
+        result = if (result.toFloat()>0) {
             ("-$result")
         } else {
             result.substring(1)
@@ -195,6 +205,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.possitiveOrNegativeButton.setOnClickListener {
             changeNumberSign()
+        }
+        binding.dotButton.setOnClickListener {
+            createLongNumber(".")
         }
     }
 }
